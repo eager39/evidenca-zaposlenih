@@ -34,7 +34,8 @@ app.use(bodyParser.json());
 
 
 app.get('/data', function(req, res) {
-  var sql='SELECT id,username FROM user ';
+  console.log(req.headers);
+  var sql='SELECT id,username,password FROM user ';
   connection.query(sql, function(err, results) {
     if (err) throw err
     var data = results;

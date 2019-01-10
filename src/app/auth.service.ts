@@ -17,7 +17,7 @@ export class AuthService {
       
       )
        {
-        this.currentUserSubject = localStorage.getItem('currentUser');
+        this.currentUserSubject =JSON.parse(localStorage.getItem('currentUser'));
       }
     public get currentUserValue() {
       return this.currentUserSubject;
@@ -32,7 +32,7 @@ export class AuthService {
             console.log("horay");
             }else{
             
-            localStorage.setItem('currentUser', "user");
+            localStorage.setItem('currentUser', JSON.stringify([{"user":"user","token":"supertoken"}]));
             console.log(localStorage.getItem("currentUser"));
             this.router.navigate(["home"]);
             }
