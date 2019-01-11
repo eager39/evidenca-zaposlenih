@@ -5,11 +5,12 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component'
 import { AuthGuard } from './auth.guard';
 
+
 const routes: Routes = [
   {
     path:"home",
     component:HomeComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path:"*",

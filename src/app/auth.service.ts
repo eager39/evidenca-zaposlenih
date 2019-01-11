@@ -17,24 +17,26 @@ export class AuthService {
       
       )
        {
-        this.currentUserSubject =JSON.parse(localStorage.getItem('currentUser'));
+       
       }
-    public get currentUserValue() {
+  public get currentUserValue() {
+    this.currentUserSubject =JSON.parse(localStorage.getItem('currentUser'));
       return this.currentUserSubject;
   }
 
     
 
-   async login() {
-      this.data=await this._dataService.add({user:"user",password:"password"},"auth").toPromise()
+   async login(logindata) {
+      this.data=await this._dataService.add(logindata,"auth").toPromise()
            
       if(this.data.status==false){
-            console.log("horay");
+            
             }else{
             
-            localStorage.setItem('currentUser', JSON.stringify([{"user":"user","token":"supertoken"}]));
-            console.log(localStorage.getItem("currentUser"));
+            localStorage.setItem('currentUser', JSON.stringify(this.data));
             this.router.navigate(["home"]);
+            this.route
+
             }
          
          
@@ -47,6 +49,7 @@ export class AuthService {
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
+        this.router.navigate(['']); 
         
     }
 }

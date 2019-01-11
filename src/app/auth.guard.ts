@@ -17,7 +17,7 @@ canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
   const currentUser = localStorage.getItem("currentUser")
   if (currentUser) {
       // logged in so return true
-      alert("yey")
+     
       return true;
   }
   this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });

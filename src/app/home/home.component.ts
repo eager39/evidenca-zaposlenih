@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiDataService } from '../api-data.service';
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -11,14 +12,16 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private _dataService: ApiDataService,
+    private auth:AuthService
    
     ) { }
   data;
-  
+  user;
   ngOnInit() {
   this.userData()  
-  
  
+ this.user=this.auth.currentUserValue;
+ alert(JSON.stringify(localStorage.getItem("curretUser")))
   }
 
   async userData() {
@@ -26,5 +29,8 @@ export class HomeComponent implements OnInit {
     console.log(this.data)
   }
  
+  logout(){
+    this.auth.logout();
+  }
 
 }

@@ -12,7 +12,7 @@ module.exports = function(){
             return {DBuser:"root",DBpass:""};
 
         case 'prod':
-            return {DBuser:"registracije",DBpass:"jf83d.dfDF8s"};
+            return {DBuser:"registracije",DBpass:""};
 
         default:
             return  {DBuser:"root",DBpass:""};
