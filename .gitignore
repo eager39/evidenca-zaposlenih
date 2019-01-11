@@ -4,9 +4,11 @@
 /dist
 /tmp
 /out-tsc
-
+/node_modules
 # dependencies
 /node_modules
+
+node_modules/
 
 # profiling files
 chrome-profiler-events.json
@@ -41,4 +43,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-backend/config.js
