@@ -34,7 +34,8 @@ app.use(bodyParser.json());
 
 
 app.get('/data', function(req, res) {
-  var sql='SELECT id,username FROM user ';
+  
+  var sql='SELECT id,username,password FROM user ';
   connection.query(sql, function(err, results) {
     if (err) throw err
     var data = results;
@@ -45,34 +46,34 @@ app.get('/data', function(req, res) {
   console.log("Error " + err);
 });
 app.post('/auth', function(request, response) {
-  /*
+  
   console.log(request.body);
-  var email = request.body.email;
+  var username = request.body.username;
   var password = request.body.password;
+  
 
-  var sql = "SELECT * FROM user WHERE email = ? AND password = ?";
-  connection.query(sql, [email, password], function(err, results) {
+  var sql = "SELECT * FROM user WHERE username = ? AND password = ?";
+  connection.query(sql, [username, password], function(err, results) {
     if (err) {
-      //console.error(err);
-      res.send(500);
+      res.send(false);
     } else if (results == "") {
-      response.status(200).json({
-        status: "false"
-      });
+      response.status(200).json(false);
     } else {
+      /*
       const JWTToken = jwt.sign({
-          user: results[0].id_user
+          user: results[0].id
         },
         'asd', {
           expiresIn: 144000
-        });
+        });*/
       response.status(200).json({
-        token: JWTToken
+        token: "token",
+        user:username
       });
     }
   });
-  */
- response.send(true);
+  
+ 
 });
 
 
