@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gostitelj: 127.0.0.1
--- Čas nastanka: 09. jan 2019 ob 15.08
+-- Čas nastanka: 11. jan 2019 ob 16.02
 -- Različica strežnika: 10.1.37-MariaDB
--- Različica PHP: 7.3.0
+-- Različica PHP: 7.0.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -32,15 +32,37 @@ CREATE TABLE `pogodba_zaposlitev` (
   `id` int(11) NOT NULL,
   `datum_sklenitve` int(30) NOT NULL,
   `datum_nastopa_dela` int(30) NOT NULL,
-  `vrsta_pogodbe` varchar(20) NOT NULL,
-  `razlog_dolocen_cas` varchar(20) NOT NULL,
-  `poklic` varchar(20) NOT NULL,
-  `strok_uspos` varchar(20) NOT NULL,
-  `naziv_del_mesta` text NOT NULL,
+  `vrsta_pogodbe` varchar(20) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
+  `razlog_dolocen_cas` varchar(20) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
+  `poklic` varchar(20) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
+  `strok_uspos` varchar(20) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
+  `naziv_del_mesta` text CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
   `st_ur_teden` int(5) NOT NULL,
-  `razporeditev_del_casa` text NOT NULL,
-  `kraj_dela` varchar(20) NOT NULL,
-  `konkurencna_klavzula` varchar(20) NOT NULL
+  `razporeditev_del_casa` text CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
+  `kraj_dela` varchar(20) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
+  `konkurencna_klavzula` varchar(20) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabele `pogodba_zaposlitev_history`
+--
+
+CREATE TABLE `pogodba_zaposlitev_history` (
+  `id` int(11) NOT NULL,
+  `datum_sklenitve` int(30) NOT NULL,
+  `datum_nastopa_dela` int(30) NOT NULL,
+  `vrsta_pogodbe` varchar(20) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
+  `razlog_dolocen_cas` varchar(20) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
+  `poklic` varchar(20) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
+  `strok_uspos` varchar(20) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
+  `naziv_del_mesta` text CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
+  `st_ur_teden` int(5) NOT NULL,
+  `razporeditev_del_casa` text CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
+  `kraj_dela` varchar(20) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
+  `konkurencna_klavzula` varchar(20) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
+  `last_change` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -54,6 +76,13 @@ CREATE TABLE `user` (
   `password` varchar(50) NOT NULL,
   `username` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Odloži podatke za tabelo `user`
+--
+
+INSERT INTO `user` (`id`, `password`, `username`) VALUES
+(2, 'krizanic', 'eager');
 
 -- --------------------------------------------------------
 
@@ -124,16 +153,16 @@ CREATE TABLE `zaposleni` (
   `id` int(10) NOT NULL,
   `maticna_st` int(5) NOT NULL,
   `davcna` int(11) NOT NULL,
-  `drzavljanstvo` varchar(15) NOT NULL,
+  `drzavljanstvo` varchar(15) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
   `stalni_naslov` varchar(20) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
   `zacasni_naslov` varchar(20) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
-  `izobrazba` varchar(20) NOT NULL,
+  `izobrazba` varchar(20) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
   `invalidnost` int(5) NOT NULL,
   `kategorija_inv` int(5) NOT NULL,
   `delna_upok` int(5) NOT NULL,
   `last_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `ime_delodajalca_dop` varchar(10) NOT NULL,
-  `naslov_delodajalca_dop` varchar(30) NOT NULL,
+  `ime_delodajalca_dop` varchar(10) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
+  `naslov_delodajalca_dop` varchar(30) CHARACTER SET utf32 COLLATE utf32_slovenian_ci NOT NULL,
   `pogodba_fk` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -142,7 +171,7 @@ CREATE TABLE `zaposleni` (
 --
 
 INSERT INTO `zaposleni` (`emso`, `ime`, `kraj_rojstva`, `drzava_rojstva`, `id`, `maticna_st`, `davcna`, `drzavljanstvo`, `stalni_naslov`, `zacasni_naslov`, `izobrazba`, `invalidnost`, `kategorija_inv`, `delna_upok`, `last_change`, `ime_delodajalca_dop`, `naslov_delodajalca_dop`, `pogodba_fk`) VALUES
-(123, 'asd', 'asd', 'asd', 2, 123, 123, 'qwe', 'qwe', 'qwe', 'qwe', 1, 1, 1, '2019-01-09 12:18:58', '', '', 0);
+(123, 'asd', 'asd', 'asd', 2, 123, 123, '?', 'qwe', 'qwe', '?', 1, 1, 1, '2019-01-09 12:18:58', '', '', 0);
 
 --
 -- Sprožilci `zaposleni`
@@ -236,7 +265,7 @@ ALTER TABLE `pogodba_zaposlitev`
 -- AUTO_INCREMENT tabele `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT tabele `vzdrzevani_druz_clani`

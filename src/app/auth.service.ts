@@ -20,7 +20,7 @@ export class AuthService {
        
       }
   public get currentUserValue() {
-    this.currentUserSubject =JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUserSubject =localStorage.getItem('currentUser');
       return this.currentUserSubject;
   }
 
@@ -29,13 +29,13 @@ export class AuthService {
    async login(logindata) {
       this.data=await this._dataService.add(logindata,"auth").toPromise()
            
-      if(this.data.status==false){
+      if(this.data==false){
             
             }else{
             
-            localStorage.setItem('currentUser', JSON.stringify(this.data));
+            localStorage.setItem('currentUser', this.data);
             this.router.navigate(["home"]);
-            this.route
+            
 
             }
          

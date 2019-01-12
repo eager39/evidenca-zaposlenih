@@ -20,13 +20,19 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   this.userData()  
  
- this.user=this.auth.currentUserValue;
- alert(JSON.stringify(localStorage.getItem("curretUser")))
+ 
+
   }
 
   async userData() {
-    this.data =await this._dataService.get("data").toPromise()
-    console.log(this.data)
+    try{
+      this.data =await this._dataService.get("data").toPromise()
+    this.user=this.data[0].username
+    }catch(err){
+      console.log(err);
+    }
+    
+   
   }
  
   logout(){
