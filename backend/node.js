@@ -28,6 +28,7 @@ var auth = function(req, res, next) {
                 console.log(err)
                 return false;
             }
+          req.user=jwt.decode(token)
             next();
         });
     } else {
@@ -51,12 +52,8 @@ app.use(bodyParser.json());
 
 
 app.get('/data', auth, function(req, res) {
-    const header = req.headers['authorization'];
-    const bearer = header.split(' ');
-    const token = bearer[1];
-    const decoded = jwt.decode(token);
 
-    var sql = 'SELECT id,username,password FROM user WHERE id="' + decoded.user + '" ';
+    var sql = 'SELECT id,username,password FROM user WHERE id="' + req.user.user + '" ';
     connection.query(sql, function(err, results) {
         if (err) throw err
         var data = results;
@@ -82,10 +79,8 @@ app.post('/auth', function(request, response) {
         } else {
           
           bcrypt.compare(password, results[0].password, function (err, result) {
-            console.log(result);
             if(result==true){
 
-            
             const JWTToken = jwt.sign({
                     user: results[0].id
                 },
