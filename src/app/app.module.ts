@@ -15,13 +15,23 @@ import { AuthGuard } from './auth.guard'
 import {JwtInterceptor} from './jwt'
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DelavciComponent } from './delavci/delavci.component';
+import { PregledComponent } from './delavci/pregled/pregled.component';
+import { DodajComponent } from './delavci/dodaj/dodaj.component';
+import { DelavecComponent } from './delavci/delavec/delavec.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    DelavciComponent,
+    PregledComponent,
+    DodajComponent,
+    DelavecComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +42,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSidenavModule,
     NoopAnimationsModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    NgbModule,
+  
+   
+   
   ],
   providers: [AuthService,ApiDataService,AuthGuard,     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },],
   bootstrap: [AppComponent]

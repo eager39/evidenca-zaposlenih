@@ -1,6 +1,24 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<button mat-menu-item routerLink="/home" routerLinkActive="home">Domov</button>
+
+    <div class="sidenav">
+    
+        <ul class="mainmenu">
+          <li><a routerLink="/home" routerLinkActive="active" >Home</a></li>
+          <li><a routerLink="/delavci" routerLinkActive="active">Delavci</a> </li>
+          
+              <li><a routerLink="/delavci" routerLinkActive="active" >Pregled</a></li>
+              <li><a routerLink="/delavci/dodaj" routerLinkActive="active" >Dodaj</a></li>
+          
+         
+          
+        </ul>
+    
+
+</div>
+<div class="content">
+
+    <router-outlet></router-outlet>
+</div>
 
 
 
-              <router-outlet></router-outlet>
+              
