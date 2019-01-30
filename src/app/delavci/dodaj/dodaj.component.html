@@ -1,3 +1,29 @@
-<p>
-  dodaj works!
-</p>
+<form [formGroup]="delavec">
+    <div class="form-group">
+    <label>
+     Ime:
+      <input type="text"  class="form-control" formControlName="ime">
+    </label>
+    </div>
+    <div class="form-group">
+    <label>
+      Priimek:
+      <input type="text"  class="form-control" formControlName="priimek">
+    </label>
+    </div>
+    <div class="form-check">
+        <input type="radio"  value='Da' formControlName="invalidnost" >  
+        <label class="form-check-label" for="exampleRadios1">
+         Da
+        </label>
+      </div>
+      <div class="form-check">
+       <input type="radio"  value='Ne' formControlName="invalidnost" >
+        <label class="form-check-label" for="exampleRadios2">
+         Ne
+        </label>
+      </div>
+  
+    
+  
+  </form>{{delavec.value | json}}
