@@ -1,4 +1,4 @@
-<form [formGroup]="delavec">
+<form [formGroup]="delavec" (ngSubmit)="onSubmit()">
     <div class="form-group">
     <label>
      Ime:
@@ -11,19 +11,104 @@
       <input type="text"  class="form-control" formControlName="priimek">
     </label>
     </div>
+
+
+    <div class="form-group">
+      <label>
+        Kraj rojstva:
+        <input type="text"  class="form-control" formControlName="kraj_rojstva">
+      </label>
+      </div>
+      <div class="form-group">
+        <label>
+          Drzava rojstva:
+          <input type="text"  class="form-control" formControlName="drzava_rojstva">
+        </label>
+        </div>
+        <div class="form-group">
+            <label>
+             Davčna številka:
+              <input type="text"  class="form-control" formControlName="davcna">
+            </label>
+            </div>
+        <div class="form-group">
+          <label>
+            Matična številka:
+            <input type="text"  class="form-control" formControlName="maticna_st">
+          </label>
+          </div>
+          <div class="form-group">
+            <label>
+              Državljanstvo:
+              <input type="text"  class="form-control" formControlName="drzavljanstvo">
+            </label>
+            </div>
+            <div class="form-group">
+              <label>
+                Stalni naslov:
+                <input type="text"  class="form-control" formControlName="stalni_naslov">
+              </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  Začasni naslov:
+                  <input type="text"  class="form-control" formControlName="zacasni_naslov">
+                </label>
+                </div>
+                <div class="form-group">
+                  <label>
+                    Izobrazba:
+                    <input type="text"  class="form-control" formControlName="izobrazba">
+                  </label>
+                  </div>
+                  <label>Invalidnost</label>
     <div class="form-check">
-        <input type="radio"  value='Da' formControlName="invalidnost" >  
+        <input type="radio"  value='da' formControlName="invalidnost" >  
         <label class="form-check-label" for="exampleRadios1">
          Da
         </label>
       </div>
       <div class="form-check">
-       <input type="radio"  value='Ne' formControlName="invalidnost" >
+       <input type="radio"  value='ne' formControlName="invalidnost" >
         <label class="form-check-label" for="exampleRadios2">
          Ne
         </label>
       </div>
-  
     
+      <div *ngIf="delavec.value.invalidnost=='da'" class="form-group">
+        <label>
+          Kategorija invalidnosti:
+          <input type="text"  class="form-control" formControlName="kat_inv">
+        </label>
+        </div>
+        <label>Delna upokojitev</label>
+        <div class="form-check">
+          <input type="radio"  value='da' formControlName="delna_upok" >  
+          <label class="form-check-label" for="exampleRadios1">
+           Da
+          </label>
+        </div>
+        <div class="form-check">
+         <input type="radio"  value='ne' formControlName="delna_upok" >
+          <label class="form-check-label" for="exampleRadios2">
+           Ne
+          </label>
+        </div>
+        <div class="form-group">
+          <label>
+            Ime delodajalca dopolnilnega dela:
+            <input type="text"  class="form-control" formControlName="ime_delo_dop">
+          </label>
+          </div>
+          <div class="form-group">
+            <label>
+              Naslov delodajalca dopolnilnega dela:
+              <input type="text"  class="form-control" formControlName="naslov_delo_dop">
+            </label>
+            </div>
+          {{delavec.value | json}}
+        
   
-  </form>{{delavec.value | json}}
+          <button class="form-control" type="submit" >Dodaj</button>
+  
+  </form>

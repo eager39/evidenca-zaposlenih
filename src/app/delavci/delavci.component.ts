@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router'
 
 @Component({
   selector: 'app-delavci',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DelavciComponent implements OnInit {
 
-  constructor() { }
+  constructor(public route: ActivatedRoute) { }
 
   ngOnInit() {
   }

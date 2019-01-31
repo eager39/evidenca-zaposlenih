@@ -1,5 +1,8 @@
 
-
+<div *ngIf="route.children.length === 0">
+    Some content that should only be shown when the user is at the parent component itself.
+  </div>
+  
 <router-outlet>
 
 </router-outlet>

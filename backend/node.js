@@ -7,6 +7,7 @@ const app = express()
 const jwt = require('jsonwebtoken');
 var conf = require('./config')
 var bcrypt = require('bcrypt');
+var util = require('util')
 conf = new conf();
 
 
@@ -44,6 +45,7 @@ connection.connect(function(err) {
     }
 
 })
+connection.query = util.promisify(connection.query)
 app.use(cors());
 app.use(bodyParser.urlencoded({
     extended: false
@@ -63,6 +65,14 @@ app.get('/data', auth, function(req, res) {
 }, err => {
     console.log("Error " + err);
 });
+app.post("/dodajDelavec",auth,function(req,res){
+  var sql="INSERT INTO zaposleni (ime,priimek,davcna,kraj_rojstva,drzava_rojstva,maticna_st,drzavljanstvo,stalni_naslov,zacasni_naslov,izobrazba,invalidnost,kategorija_inv,delna_upok,ime_delo_dop,naslov_delo_dop VALUES ?"
+  try {
+    var result = await connection.query(sql,)
+} catch(err) {
+    throw new Error(err)
+}
+})
 
 app.post('/auth', function(request, response) {
  
